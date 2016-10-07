@@ -4,7 +4,7 @@ FROM php:7.0-fpm
 RUN apt-get update && apt-get install -y \
         git-core zlib1g-dev \
         libicu-dev libmcrypt-dev libbz2-dev libxslt-dev curl unzip wget \
-    && docker-php-ext-install -j$(nproc) mysqli intl bcmath mcrypt zip bz2 mbstring pcntl xsl pdo
+    && docker-php-ext-install -j$(nproc) mysqli intl bcmath mcrypt zip bz2 mbstring pcntl xsl pdo pdo_mysql
 
 # Setup the Composer installer
 RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
