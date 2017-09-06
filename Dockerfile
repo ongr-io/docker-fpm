@@ -1,4 +1,4 @@
-FROM php:7.0-fpm
+FROM php:7.1-fpm
 
 # Install selected extensions and other stuff
 RUN apt-get update && apt-get install -y \
