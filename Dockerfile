@@ -1,4 +1,4 @@
-FROM php:5.3-fpm
+FROM php:5.6-fpm
 
 # Install selected extensions and other stuff
 RUN apt-get update && apt-get install -y \

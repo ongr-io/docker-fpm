@@ -1,4 +1,4 @@
-# PHP 5.3 fpm docker container
+# PHP 5.6 fpm docker container
 
 ## What is it?
 
