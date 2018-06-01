@@ -18,6 +18,8 @@ RUN set -xe && \
   make install && \
   rm -rf /tmp/xdebug-$XDEBUG_VERSION
 
+RUN usermod -u $LOCAL_USER_ID www-data
+
 RUN pecl install memcached-2.2.0
 RUN pecl install memcache-3.0.8
 RUN echo extension=memcached.so >> /usr/local/etc/php/conf.d/memcached.ini
