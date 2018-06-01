@@ -5,6 +5,12 @@ RUN apt-get update && apt-get install -y \
         libicu-dev libmcrypt-dev libbz2-dev libxslt-dev curl unzip wget telnet \
     && docker-php-ext-install -j$(nproc) mysqli intl bcmath zip bz2 mbstring pcntl xsl pdo pdo_mysql
 
+ARG LOCAL_GROUP_ID
+ENV LOCAL_GROUP_ID "$LOCAL_GROUP_ID"
+
+ARG LOCAL_USER_ID
+ENV LOCAL_USER_ID "$LOCAL_USER_ID"
+
 ENV XDEBUG_VERSION 2.6.0
 
 RUN set -xe && \
@@ -25,5 +31,11 @@ COPY custom.ini /usr/local/etc/php/conf.d/20-custom.ini
 RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
   && curl -o /tmp/composer-setup.sig https://composer.github.io/installer.sig \
   && php -r "if (hash('SHA384', file_get_contents('/tmp/composer-setup.php')) !== trim(file_get_contents('/tmp/composer-setup.sig'))) { unlink('/tmp/composer-setup.php'); echo 'Invalid installer' . PHP_EOL; exit(1); }"
+
+RUN set -xe && \
+  groupadd -g $LOCAL_GROUP_ID -o -f user && \
+  useradd --shell /bin/bash -u $LOCAL_USER_ID -g user -o -c "" -m user
+
+USER user
 
 WORKDIR "/var/www"
