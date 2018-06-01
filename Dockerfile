@@ -19,7 +19,8 @@ RUN set -xe && \
   rm -rf /tmp/xdebug-$XDEBUG_VERSION
 
 RUN pecl install memcached-2.2.0
-RUN pecl install memcache-3.0.8
+RUN CFLAGS="-fgnu89-inline" pecl install memcache-3.0.8
+
 RUN echo extension=memcached.so >> /usr/local/etc/php/conf.d/memcached.ini
 RUN echo extension=memcache.so >> /usr/local/etc/php/conf.d/memcache.ini
 
