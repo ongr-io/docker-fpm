@@ -1,4 +1,4 @@
-FROM php:5.3-fpm
+FROM devilbox/php-fpm-5.3
 
 # Install selected extensions and other stuff
 RUN apt-get update && apt-get install -y \
